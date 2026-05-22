@@ -1,0 +1,19 @@
+"$schema" = "../gen/schemas/schema.json"
+
+[[permission]]
+identifier = "allow-app-commands"
+description = "Allow app-defined commands from the main window"
+commands.allow = [
+    "select_working_folder",
+    "list_novel_chapters",
+    "cancel_download",
+    "download_novel_chapters",
+    "download_novel",
+    "open_fetch_window",
+    "probe_fetcher_page",
+]
+
+[[permission]]
+identifier = "allow-submit-captured-html"
+description = "Allow the fetcher webview to submit capture results"
+commands.allow = ["submit_captured_html", "submit_probe_result"]

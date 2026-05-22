@@ -1,0 +1,14 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "fetcher-remote",
+  "description": "Allow remote pages loaded in the fetcher window to call HTML capture commands",
+  "windows": ["fetcher"],
+  "remote": {
+    "urls": ["http://*", "https://*"]
+  },
+  "permissions": [
+    "core:default",
+    "core:event:default",
+    "allow-submit-captured-html"
+  ]
+}

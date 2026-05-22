@@ -1,0 +1,61 @@
+.chapter-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--panel-border);
+}
+
+.chapter-toolbar__btn {
+  padding: 0;
+  border: none;
+  background: none;
+  box-shadow: none;
+  color: inherit;
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 500;
+  cursor: pointer;
+  opacity: 0.72;
+  transition: opacity 0.15s;
+}
+
+.chapter-toolbar__btn:hover {
+  opacity: 1;
+}
+
+.chapter-toolbar__sep {
+  color: var(--text-header);
+  font-size: 0.82rem;
+  user-select: none;
+}
+
+.chapter-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding: 0.3rem 0;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.chapter-row--locked {
+  cursor: not-allowed;
+  opacity: 0.5;
+  color: var(--text-muted);
+}
+
+.chapter-row input {
+  margin-top: 0.2rem;
+  flex-shrink: 0;
+  width: 1rem;
+  height: 1rem;
+  cursor: pointer;
+}
+
+.chapter-row--locked input[type="checkbox"] {
+  cursor: not-allowed;
+  opacity: 0.55;
+  accent-color: var(--text-muted);
+}

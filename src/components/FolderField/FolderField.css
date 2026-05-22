@@ -1,0 +1,70 @@
+.folder-field {
+  display: flex;
+  gap: 0.4rem;
+  align-items: stretch;
+}
+
+.folder-field__input {
+  flex: 1;
+  min-width: 0;
+  box-sizing: border-box;
+  padding: 0.5rem 0.65rem;
+  border-radius: 8px;
+  border: 1px solid var(--input-border);
+  background: var(--input-bg);
+  color: inherit;
+  font: inherit;
+  font-size: 0.9rem;
+}
+
+.folder-field__btn {
+  position: relative;
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 3.25rem;
+  padding: 0.45rem 0.7rem;
+  border-radius: 8px;
+  border: 1px solid var(--input-border);
+  background: var(--button-bg);
+  color: inherit;
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+  transition: border-color 0.2s, background-color 0.2s;
+}
+
+.folder-field__label {
+  line-height: 1;
+  transition: opacity 0.15s ease;
+}
+
+.folder-field__icon {
+  position: absolute;
+  inset: 0;
+  width: 1.65rem;
+  height: 1.65rem;
+  margin: auto;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+}
+
+.folder-field__btn:hover .folder-field__label {
+  opacity: 0;
+}
+
+.folder-field__btn:hover .folder-field__icon {
+  opacity: 1;
+}
+
+.folder-field__btn:hover {
+  border-color: #396cd8;
+}
+
+.folder-field__btn:active {
+  background-color: var(--button-active-bg);
+}

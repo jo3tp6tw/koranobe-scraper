@@ -1,0 +1,122 @@
+{
+  "name": "newtoki",
+  "version": 1,
+  "base_url": "https://sbxh1.com",
+
+  "fetch": {
+    "request_delay_ms": 1200,
+    "retry": { "attempts": 3, "backoff_ms": 1500 },
+    "concurrency": 1
+  },
+
+  "gates": {
+    "chapter": {
+      "selector": "article.novel-viewer .novel-paid-gate",
+      "html_contains": ["novel-paid-gate", "유료 회차"]
+    },
+    "index_item": {
+      "selector": ".ne-pt, .novel-ep-pt, .ep-row-v2-pt",
+      "html_contains": ["<!-- -->P", ">P</span>", "novel-ep-pt", "ne-pt", "class=\"ne-pt\""]
+    }
+  },
+
+  "vars": {
+    "work_id": {
+      "from": "url",
+      "type": "regex",
+      "pattern": "/novel/(\\d+)",
+      "group": 1
+    }
+  },
+
+  "pages": {
+    "index": {
+      "url": "{input}",
+      "source": { "type": "html" },
+      "outputs": {
+        "title": {
+          "type": "css",
+          "selector": "section.novel-detail h1"
+        },
+        "author": {
+          "type": "css",
+          "selector": "section.novel-detail .nd-meta > span:first-child"
+        },
+        "introduction": {
+          "type": "css",
+          "selector": "p.nd-desc"
+        },
+        "tags": {
+          "type": "css",
+          "selector": "a.hero-v2-tag",
+          "multiple": true,
+          "post": [{ "op": "trim" }]
+        },
+        "chapters": {
+          "type": "list",
+          "selector": "ul.novel-eps > li.novel-ep-row:not(.novel-ep--not-ready), .ep-list-v2 li.ep-row-v2--ready",
+          "item": {
+            "num": {
+              "type": "css",
+              "selector": "span.ne-num, .ep-row-v2-num"
+            },
+            "subtitle": {
+              "type": "css",
+              "selector": "span.ne-title, .ep-row-v2-title"
+            },
+            "title": {
+              "type": "template",
+              "value": "{item.num} {item.subtitle}"
+            },
+            "href": {
+              "type": "css",
+              "selector": "a.novel-ep-link, a.ep-row-v2-link",
+              "extract": "attr",
+              "attr": "href"
+            },
+            "url": {
+              "type": "template",
+              "value": "{base_url}{item.href}",
+              "resolve": "absolute"
+            },
+            "id": {
+              "type": "css",
+              "selector": "a.novel-ep-link, a.ep-row-v2-link",
+              "extract": "attr",
+              "attr": "href",
+              "post": [{ "op": "regex", "pattern": "([^/]+)$", "group": 1 }]
+            },
+            "paid_gate": {
+              "type": "css",
+              "selector": ".ne-pt, .novel-ep-pt, .ep-row-v2-pt, span.ne-pt",
+              "extract": "text"
+            }
+          }
+        }
+      }
+    },
+
+    "chapter": {
+      "iterate": "pages.index.outputs.chapters",
+      "url": "{item.url}",
+      "source": { "type": "html" },
+      "outputs": {
+        "title": {
+          "type": "css",
+          "selector": "h1.ne-h1"
+        },
+        "paid_gate": {
+          "type": "css",
+          "selector": "article.novel-viewer .novel-paid-gate",
+          "extract": "text"
+        },
+        "content": {
+          "type": "css",
+          "selector": "article.novel-viewer",
+          "extract": "html",
+          "post": [{ "op": "select_all", "selector": "p", "join": "\n\n" }]
+        }
+      }
+    }
+  }
+}

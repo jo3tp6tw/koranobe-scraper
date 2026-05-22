@@ -1,0 +1,24 @@
+[package]
+name = "newtoki-scraper"
+version = "0.1.0"
+description = "newtoki novel scraper"
+authors = ["you"]
+edition = "2021"
+
+[lib]
+name = "newtoki_scraper_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = [] }
+tauri-plugin-dialog = "2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+thiserror = "1.0"
+scraper = "0.20"
+tokio = { version = "1", features = ["rt", "rt-multi-thread", "macros", "time", "sync"] }
+url = "2"
+regex = "1"
