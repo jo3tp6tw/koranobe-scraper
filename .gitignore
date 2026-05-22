@@ -34,8 +34,8 @@ docs/probes/*
 graphify-out/
 .graphify*
 
-# 本機 patch 對照腳本
-scripts/patches/
+# 本機開發腳本（sync、patches 等）
+scripts/
 
 # Lordicon 動畫 icon（需自行從 lordicon.com 下載 FREE 版本）
 public/lordicon/*.json
